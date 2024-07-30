@@ -33,6 +33,7 @@ public class ApiHandler implements RequestHandler<APIGatewayProxyRequestEvent, A
 	public APIGatewayProxyResponseEvent handleRequest(APIGatewayProxyRequestEvent request, Context context) {
 		APIGatewayProxyResponseEvent response = new APIGatewayProxyResponseEvent();
 		Map<String, String> content;
+
 		try {
 			content = objectMapper.readValue(request.getBody(), new TypeReference<Map<String, String>>() {});
 		} catch (IOException e) {
@@ -49,6 +50,7 @@ public class ApiHandler implements RequestHandler<APIGatewayProxyRequestEvent, A
 		item.put("principalId", new AttributeValue(content.get("principalId")));
 		item.put("createdAt", new AttributeValue(createdAt));
 
+		// Ensure 'body' is stored correctly as a map in DynamoDB
 		Map<String, AttributeValue> bodyMap = new HashMap<>();
 		content.forEach((key, value) -> bodyMap.put(key, new AttributeValue().withS(value)));
 		item.put("body", new AttributeValue().withM(bodyMap));
