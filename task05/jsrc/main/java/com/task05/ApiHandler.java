@@ -12,11 +12,20 @@ import com.amazonaws.services.dynamodbv2.model.PutItemResult;
 import com.amazonaws.AmazonServiceException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.core.type.TypeReference;
+import com.syndicate.deployment.annotations.lambda.LambdaHandler;
+import com.syndicate.deployment.model.RetentionSetting;
 
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
+
+@LambdaHandler(lambdaName = "api_handler",
+		roleName = "api_handler-role",
+		isPublishVersion = false,
+		aliasName = "${lambdas_alias_name}",
+		logsExpiration = RetentionSetting.SYNDICATE_ALIASES_SPECIFIED
+)
 
 public class ApiHandler implements RequestHandler<APIGatewayProxyRequestEvent, APIGatewayProxyResponseEvent> {
 	private static final AmazonDynamoDB dynamoDB = AmazonDynamoDBClientBuilder.defaultClient();
