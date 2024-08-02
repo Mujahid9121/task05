@@ -14,7 +14,11 @@
             "dynamodb:DeleteItem",
             "ssm:PutParameter",
             "ssm:GetParameter",
-            "kms:Decrypt"
+            "kms:Decrypt",
+            "gateway:POST",
+            "gateway:GET",
+            "gateway:PUT",
+            "gateway:DELETE"
           ],
           "Effect": "Allow",
           "Resource": "*"
@@ -45,7 +49,7 @@
           "lambda_name": "api_handler",
           "api_key_required": false,
           "method_request_parameters": {},
-          "integration_request_body_template": {},
+          "integration_request_body_template": { "application/json": "{ \"body\": $input.json('$') }"},
           "responses": [],
           "integration_responses": [],
           "default_error_pattern": true
@@ -63,4 +67,7 @@
     "global_indexes": [],
     "autoscaling": []
   }
+
+
+
 }

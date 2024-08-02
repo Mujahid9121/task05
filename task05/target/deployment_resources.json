@@ -15,8 +15,10 @@
     "security_group_ids" : [ ],
     "dependencies" : [ ],
     "event_sources" : [ ],
-    "env_variables" : { },
-    "publish_version" : false,
+    "env_variables" : {
+      "region" : "${region}"
+    },
+    "publish_version" : true,
     "alias" : "${lambdas_alias_name}",
     "logs_expiration" : "${logs_expiration}",
     "snap_start" : "None"
