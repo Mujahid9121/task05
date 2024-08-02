@@ -57,7 +57,7 @@ public class ApiHandler implements RequestHandler<Map<String, Object>, Map<Strin
 			AmazonDynamoDB client = AmazonDynamoDBClientBuilder.standard()
 					.withRegion("eu-central-1")
 					.build();
-			client.putItem("cmtr-cc4eb9d3-Events", itemValues);
+			client.putItem("cmtr-4a67a7b9-Events-test", itemValues);
 		} catch (Exception e) {
 			context.getLogger().log("Error putting item in DynamoDB: " + e.getMessage());
 			Map<String, Object> errorResponse = new HashMap<>();
